@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS= -Wall -Wextra -static -O3 -funroll-loops -fexpensive-optimizations 
-#CFLAGS=  -pg -ggdb -Wall -lm   -Wno-missing-braces -static 
+CFLAGS= -Wall -Wextra -O3 -funroll-loops -static
+#CFLAGS=  -pg -ggdb -Wall -lm   -Wno-missing-braces 
 
 all: probSAT
 

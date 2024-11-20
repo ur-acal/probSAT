@@ -209,7 +209,7 @@ static inline void parseFile() {
 				c = fgetc(fp); //read the complete comment line until a eol is detected.
 			} while ((c != '\n') && (c != EOF));
 		else if (c == 'p') { //p-line detected
-			if ((fscanf(fp, "%*s %d %d", &numVars, &numClauses))) //%*s should match with "cnf"
+			if ((fscanf(fp, "%*s %d %d\n", &numVars, &numClauses))) //%*s should match with "cnf"
 				break;
 		} else {
 			printf("c No parameter line found! Computing number of atoms and number of clauses from file!\n");
@@ -261,6 +261,16 @@ static inline void parseFile() {
 	}
 
 	for (i = 1; i <= numClauses; i++) {
+
+		c = fgetc(fp);
+		while (c == 'c') {//comment line - skip content
+			do {
+				c = fgetc(fp); //read the complete comment line until a eol is detected.
+			} while ((c != '\n') && (c != EOF));
+			printf("%c", c);fflush(stdout);
+			c = fgetc(fp);
+		}
+		ungetc(c, fp);
 		whereFalse[i] = -1;
 		if (freeStore < MAXCLAUSELENGTH) {
 			tempClause = (int*) malloc(sizeof(int) * STOREBLOCK);
