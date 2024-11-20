@@ -4,11 +4,9 @@ project(probSAT)
 
 set(CMAKE_CXX_STANDARD 11)
 
-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-endif()
 
 set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
 
-add_executable(probSAT probsat.c)
+add_executable(probSAT probSAT.c)
+target_link_options(probSAT BEFORE PRIVATE  -lm)
